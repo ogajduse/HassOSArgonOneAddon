@@ -1,15 +1,6 @@
 #!/usr/bin/with-contenv bashio
 
 ###
-#Inputs - inputs from Home Assistant Config
-###
-CorF=$(cat options.json |jq -r '.CorF')
-t1=$(mkfloat $(cat options.json |jq -r '.LowRange'))
-t2=$(mkfloat $(cat options.json |jq -r '.MediumRange'))
-t3=$(mkfloat $(cat options.json |jq -r '.HighRange'))
-quiet=$(cat options.json |jq -r '.QuietProfile')
-
-###
 #Methods - methods called by script
 ###
 
@@ -34,7 +25,16 @@ fcomp() {
     [[ ${1:0:1} == '-' ]] && (( x[0] *= -1 ))
     [[ ${3:0:1} == '-' ]] && (( y[0] *= -1 ))
     (( ${x:-0} $op ${y:-0} ))
-} 
+}
+
+###
+#Inputs - inputs from Home Assistant Config
+###
+CorF=$(cat options.json |jq -r '.CorF')
+t1=$(mkfloat $(cat options.json |jq -r '.LowRange'))
+t2=$(mkfloat $(cat options.json |jq -r '.MediumRange'))
+t3=$(mkfloat $(cat options.json |jq -r '.HighRange'))
+quiet=$(cat options.json |jq -r '.QuietProfile')
 
 ###
 #initial setup - prepare things for operation
